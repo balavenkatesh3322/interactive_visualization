@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+    overflow: hidden;
+    background-color: rgb(149, 161, 126);
+    opacity: 1;
+}
+
+circle{
+    fill: rgb(112, 130, 89);
+    opacity: 0.5;
+}
+text{
+    font-size: 2em;
+    font-family: sans-serif;
+}
+.tick text{
+    font-size: 1.7em;
+    fill: #635F5D
+}
+.tick line{
+    stroke: #C0C0BB;
+}
+.axis-label{
+    font-size: 4em;
+    fill: #292925;
+}
+#menus{
+    font-size: 1.5em;
+    text-align: left;
+}
+#menus select{
+    font-size: 1.5rem;
+}
+#menus select option {
+    font-size: 1rem;
+}

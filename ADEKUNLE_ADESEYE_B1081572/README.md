@@ -1,0 +1,2 @@
+# Scatter Plot 
+This scatter plot shows data about California Wildfires[Kaggle Repository: Top 20 Wildfires in California](https://www.kaggle.com/datasets/annieichen/top-20-largest-california-wildfires/code).
