@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Interactive Visualisation ICA </title>
+
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+        
+        <div id="my_viz"></div>
+
+        <style>
+            body {
+                font-family:Rockwell;
+            }
+            .legend {
+                border: 10px solid whitesmoke;
+                background-color:whitesmoke;
+                border-radius: 10px 10px 10px 10px;
+                font-size: 0.9em;
+                margin: 10px;
+                padding: 8px;
+                color:teal;
+            }
+            .bld {
+                font-weight: bold;
+            }
+            
+             
+            
+        </style>
+        <style>
+          text:hover { opacity: .5 !important; }
+        </style>
+
+        
+    </head>
+    <body>
+        <script>
+
+            /// Data ///
+            d3.json("WORDCLOUD_DATA.json").then(buildcloud);
+
+            function buildcloud(dataSet) {
+          
+            /// set the dimensions and margins of the graph ///
+            const margin = {top: 10, right: 10, bottom: 10, left: 10},
+                width =  600,
+                height = 260 ;
+            
+            /// append the svg object to the body of the page ///
+            const svg = d3.select("#my_viz").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .style('border', '10px solid whitesmoke')
+                .style('background', 'whitesmoke')
+                .style('border-radius', '10px 10px 10px 10px')
+              .append("g")
+                .attr("transform",
+                      "translate(" + margin.left + "," + margin.top + ")");
+                      
+            /// create toolip ///
+            const tooltip = d3.select("#my_viz")
+                  .append("div")
+                  .style("visibility", "hidden")
+                  .attr("position", "absolute")
+                  .style("backround-color", "black");
+
+            /// create word scale ///
+            const wordscale = d3.scaleLinear().domain([10,75]).range([10,160])
+
+            ///sclae font ///
+            
+            /// defines the layout for the wordcloud ///
+            const layout = d3.layout.cloud()
+              .size([width, height])
+              .words(dataSet.map(function(d) { return {text: d[0], size: d[1]}; }))
+              .padding(8)        /// this is the space between words ///
+              .rotate(function() { return -10; })        /// this is the angle of roation of the words ///
+              .text(function(d) { return d.text; })
+              .font("Rockwell")  /// style of the font ///
+              .fontWeight("bold")
+              .fontSize(function(d) {return (d.size) ; })     /// size of the font as well as used to scle the text that have samller values /// 
+              .on("end", draw);
+              
+            layout.start();
+            
+            /// draws the wordcloud ///
+            function draw(dataSet) {
+              svg
+                .attr("text-align", "center")
+                .append("g")
+                  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+                  .selectAll("text")
+                    .data(dataSet)
+                  .enter().append("text")
+                    .style("font-size", function(d) {return 3/4*(d.size)+10 ; })
+                    .attr("text-anchor", "middle")
+                    .style("fill", "teal")
+                    .style("font-family", "Rockwell")
+                    .attr("transform", function(d) {
+                      return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    
+                    .text(function(d) { return d.text; })
+                    .on("mouseover", (e,d) => {
+                      console.log(e)
+                      console.log(d)
+                      tooltip.style('visibility', 'visible')
+                             .text(`${d.text}:` + ` ${d.size}`+' deaths')
+                    })
+                    .on('mousemove', (e,d) => {
+                    tooltip.style('top', (e.pageY-50) + 'px')
+                           .style('left', (e.pageX-50) + 'px')
+                    })
+                    .on('mouseout', () =>{
+                    tooltip.style('visibility', 'hidden') 
+                    })
+  
+                    
+                    
+                  }
+
+            }
+            </script>
+        
+
+            <div style="width:31%;">
+            <div class="legend">
+        A wordcloud showing in what month the most deaths occured.
+        </div>
+        </div>
+
+    </body>
+</html>
