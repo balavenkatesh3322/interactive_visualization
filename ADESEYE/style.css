@@ -4,6 +4,10 @@ body{
     background-color: rgb(149, 161, 126);
     opacity: 1;
 }
+.header{
+    text-align: center;
+    font-size: 1.5em;
+}
 
 circle{
     fill: rgb(112, 130, 89);
