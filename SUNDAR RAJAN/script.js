@@ -70,7 +70,7 @@ function graphShow(sample){
           .attr('x', (a) => xScale(a.cause) - 5)
           .attr('width', xScale.bandwidth() + 10)
 
-        const y = yScale(actual.value)
+        const y = yScale(i.value)
 
         line = chart.append('line')
           .attr('id', 'limit')
@@ -86,7 +86,7 @@ function graphShow(sample){
           .attr('fill', 'white')
           .attr('text-anchor', 'middle')
           .text((a, idx) => {
-            const divergence = (a.value - actual.value).toFixed(1)
+            const divergence = (a.value - i.value).toFixed(1)
             
             let text = ''
             if (divergence > 0) text += '+'
