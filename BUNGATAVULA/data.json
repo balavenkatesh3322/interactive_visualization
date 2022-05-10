@@ -1,0 +1,32 @@
+[
+ {
+   "fire_name": "Mendocino Complex",
+   "acres": 459123,
+   "month": "July"
+ },
+ {
+   "fire_name": "Thomas",
+   "acres": 281893,
+   "month": "December"
+ },
+ {
+   "fire_name": "Cedar",
+   "acres": 273246,
+   "month": "October"
+ },
+ {
+   "fire_name": "Rush",
+   "acres": 271911,
+   "month": "August"
+ },
+ {
+   "fire_name": "Rim",
+   "acres": 257314,
+   "month": "August"
+ },
+ {
+   "fire_name": "Zaca",
+   "acres": 240207,
+   "month": "July"
+ }
+]
